@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div id="components-demo">
+
+        <div class="container my-5">
+
+            <father></father>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"></script>
+
+    <script>
+        Vue.component('father', {
+                template: `
+            <div>
+            <h1> Counter 1: {{$store.state.number}} </h1>
+
+            <son></son>
+            </div>
+            `,
+
+            }),
+
+            Vue.component('son', {
+                template: ` 
+                <div>
+            <h1> Counter 2:  {{number}} </h1>
+           
+
+            <button class="btn btn-primary mt-2" v-on:click="$store.commit('aumentar')">+</button>
+            
+            <button class="btn btn-danger mt-2" v-on:click="disminuir">-</button>
+            
+            <button class="btn btn-warning mt-2" v-on:click="masdos(2)">x2</button>
+            </div>
+            `,
+            computed:{
+                ...Vuex.mapState(['number'])
+            },
+            methods:{
+                ...Vuex.mapMutations(['disminuir','masdos'])
+            }
+            })
+
+            const store = new Vuex.Store({  
+                state: {
+                    number:10,
+                    pokemonlist: []
+                  
+                },
+
+                mutations: {
+                    aumentar () {
+                        this.state.number++
+                    },
+                    disminuir () {
+                        this.state.number--
+                    },
+                    masdos (state,n) {
+                        state.number += n
+                    }
+                }
+
+            })
+
+
+        new Vue({
+            el: '#components-demo',
+            store:store
+        })
+    </script>
+
+
+
+
+</body>
+
+</html>
