@@ -25,6 +25,7 @@
 
 
 
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"></script>
 
@@ -42,6 +43,8 @@
 
             Vue.component('son', {
                 template: ` 
+
+
                 <div>
             <h1> Counter 2:  {{number}} </h1>
            
@@ -50,21 +53,43 @@
             
             <button class="btn btn-danger mt-2" v-on:click="disminuir">-</button>
             
-            <button class="btn btn-warning mt-2" v-on:click="masdos(2)">x2</button>
+            <button class="btn btn-success mt-2" v-on:click="masdos(2)">x2</button>
+
+            <button class="btn btn-warning mt-2" v-on:click="obtenerPokemon">Pokedex</button>
+
+            
+                <ul  v-for="items of pokemonlist">
+                 <li>{{items.nombre}}</li>
+               </ul>
+
+
             </div>
             `,
             computed:{
-                ...Vuex.mapState(['number'])
+                ...Vuex.mapState(['number','pokemonlist'])
             },
             methods:{
-                ...Vuex.mapMutations(['disminuir','masdos'])
+                ...Vuex.mapMutations(['disminuir','masdos']),
+                ...Vuex.mapActions(['obtenerPokemon'])
             }
             })
 
             const store = new Vuex.Store({  
                 state: {
                     number:10,
-                    pokemonlist: []
+                    pokemonlist: [[{
+        "nombre": "pichachu",
+        "id": 1
+    },
+    {
+        "nombre": "metapot",
+        "id": 2
+    },
+    {
+        "nombre": "Marco",
+        "id": 3
+    }
+]]
                   
                 },
 
@@ -77,8 +102,22 @@
                     },
                     masdos (state,n) {
                         state.number += n
+                    },
+
+                    llenarpokelist(state,pokeaction){
+                        state.pokelist = pokeaction}
+                    
+                },
+
+                actions:{
+                    obtenerPokemon: async function({commit}){
+                        const data = await fetch('pokemon.json');
+                        const pokemon = await data.json();
+                        commit ('llenarpokelist', pokemon)
                     }
                 }
+
+              
 
             })
 

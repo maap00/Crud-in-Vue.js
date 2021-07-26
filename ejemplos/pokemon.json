@@ -1,5 +1,13 @@
-[ 
-    {"nombre":"pichachu", "id":1},
-    {"nombre":"metapot", "id":2},
-    {"nombre":"Marco", "id":3}
-    ]
+[{
+        "nombre": "pichachu",
+        "id": 1
+    },
+    {
+        "nombre": "metapot",
+        "id": 2
+    },
+    {
+        "nombre": "Marco",
+        "id": 3
+    }
+]
