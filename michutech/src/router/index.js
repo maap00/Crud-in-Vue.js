@@ -5,22 +5,24 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
+
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
+    
+    component: () => import(/* webpackChunkName: "tasks" */ '../views/Home.vue')
   },
   {
     path: '/chat',
     name: 'Chat',
-  
-    component: () => import(/* webpackChunkName: "chat" */ '../views/Chat.vue')
+    
+    component: () => import(/* webpackChunkName: "tasks" */ '../views/Chat.vue')
   },
   {
     path: '/tasks',
     name: 'Tasks',
-  
-    component: () => import(/* webpackChunkName: "task" */ '../views/Tasks.vue')
+    
+    component: () => import(/* webpackChunkName: "tasks" */ '../views/Tasks.vue')
   }
 ]
 

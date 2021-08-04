@@ -1,14 +1,29 @@
 <template>
-  <div id="app">
-         <b-navbar toggleable="lg" type="dark" variant="info"></b-navbar>
+  <v-app >
 
-    <div id="nav">
-            <router-link to="/">Home</router-link> |
-       <router-link to="/tasks">Tasks</router-link> |
-      <router-link to="/chat">Chat</router-link> 
+    <Navbar/>  
 
-    </div>
-    <router-view/>
-  </div>
+    
+  
+
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
+<script>
+import Navbar from '@/components/Navbar.vue'
+
+
+export default {
+
+  name: 'App',
+  components : {Navbar},
+
+  data: () => ({
+    //
+  }),
+ 
+};
+</script>
